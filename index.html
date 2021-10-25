@@ -1,0 +1,34 @@
+<html>
+
+<body>
+    <select onchange="check()" id="advisory section">
+        <option value="NULL">None</option>
+        <option value="P1">P1</option>
+        <option value="P2">P2</option>
+        <option value="P3">P3</option>
+        <option value="P4">P4</option>
+        </select>
+        <select id="handle section">
+            <option value="P1">P1</option>
+            <option value="P2">P2</option>
+            <option value="P3">P3</option>
+            <option value="P4">P4</option>
+        </select>
+
+
+
+
+
+
+
+<script>
+    function check(){
+  if(document.getElementById('advisory section').value =="NULL")
+    document.getElementById('handle section').disabled=false;
+  else
+    document.getElementById('handle section').disabled=true;
+}
+</script>
+</body>
+
+</html>
