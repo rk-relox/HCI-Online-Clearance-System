@@ -49,7 +49,7 @@ $row = mysqli_fetch_assoc($profilequery);
         <?php
         echo "<center><h3>10 - $section </h3></center>";
         
-        include "resources/plugins/verification-table.php"
+        include "resources/plugins/clearance-table.php"
         ?>
 
     </div>

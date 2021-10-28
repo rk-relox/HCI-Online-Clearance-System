@@ -38,12 +38,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         VALUES ('$teacher_id', '$subject_id', '$section_id')";
         $query1 = mysqli_query($conn, $sql1);
         if($query1){
-            header("location:teacherdashboard.php");
-        }
-      }
-      
+            $checksql = "SELECT a.first_name, a.last_name, a.middle_name, 
+            c.subject_name, d.section_name, f.remarks,f.comment, f.date_time_created
+            FROM teacher a
+            JOIN lesson_plan b ON a.teacher_id = b.teacher_id
+            JOIN subject c ON b.subject_id = c.subject_id
+            JOIN section d ON b.section_id = d.section_id
+            JOIN student e ON d.section_id = e.section_id
+            JOIN clearance f ON b.lesson_plan_id = f.lesson_plan_id
+            WHERE d.section_id = $section_id
+            AND b.teacher_id = $teacher_id
+            GROUP BY a.teacher_id";
+            $checkquery = mysqli_query($conn, $checksql);
+            $row2 = mysqli_fetch_assoc($checkquery);
+            if($row2 == null){
+                $check1sql = "SELECT * FROM clearance a
+                JOIN lesson_plan b ON a.lesson_plan_id = b.lesson_plan_id
+                JOIN section c ON b.section_id = c.section_id
+                WHERE c.section_id = $section_id
+                GROUP BY a.student_id";
 
-      
+                $lessonsql = "SELECT * FROM lesson_plan a
+                WHERE teacher_id = $teacher_id";
+                 $lessonresult = mysqli_query($conn, $lessonsql);
+                 $lessonrow = mysqli_fetch_assoc($lessonresult);
+                 $lesson_id = $lessonrow['lesson_plan_id'];
+
+
+
+                 $check1result = mysqli_query($conn, $check1sql);
+                 while($check1row = mysqli_fetch_array($check1result)){
+                     $student_id = $check1row['student_id'];
+                     
+                     $sql1 = "INSERT INTO clearance
+                     (lesson_plan_id, student_id,remarks, date_time_created) 
+                     VALUES ('$lesson_id', '$student_id', 'Pending', NOW())";
+                     $query1 = mysqli_query($conn, $sql1);
+                 }
+                 header("location:teacherdashboard.php");
+            }
+           
+        }
+      }      
     }
     
   }

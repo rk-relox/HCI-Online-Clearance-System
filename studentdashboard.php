@@ -17,7 +17,7 @@ $profilesql = "SELECT * FROM student a
 JOIN section b ON a.section_id = b.section_id
 WHERE a.student_id = $current_id";
     $profilequery = mysqli_query($conn, $profilesql);
-$row = mysqli_fetch_assoc($profilequery);
+    $row = mysqli_fetch_assoc($profilequery);
 
 $profilesql1 = "SELECT a.first_name, a.middle_name, a.last_name FROM teacher a
 JOIN lesson_plan b ON a.teacher_id = b.teacher_id

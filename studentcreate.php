@@ -14,9 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['Username'];
     $password = $_POST['Password'];
 
+  
+ 
     $sql = "INSERT INTO student 
     (first_name, middle_name, last_name, grade, section_id, lrn, gender, contact_number, birthday, address, username, password, status) 
-    VALUES ('$first_name', '$middle_name', '$last_name', 10, '$section', '$lrn', '$gender', '$contactnumber', '$birthday', '$address', '$username', '$password', 'Pending')";
+    VALUES ('$first_name', '$middle_name', '$last_name', '10', '$section', '$lrn', '$gender', '$contactnumber', '$birthday', '$address', '$username', '$password', 'Pending')";
     $query = mysqli_query($conn, $sql);
     if($query){
       $query = mysqli_query($conn, "SELECT student_id FROM student WHERE username = '$username'");

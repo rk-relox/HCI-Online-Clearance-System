@@ -30,8 +30,8 @@ if ($result->num_rows > 0) {
             <td align="center"><?php echo $row["last_name"] . ', ' . $row['first_name'] . '  ' . $row['middle_name']; ?></td>
             <td><?php echo $row["lrn"]?></td>
             <td><?php echo $row["status"]?></td>
-            <td><button type='submit' name='verified' value="<?php echo $row['student_id'] ?>" onclick="reloadPage();" >Verified</button></td>
-            <td><button type='submit' name='denied' value="<?php echo $row['student_id'] ?>" onclick="reloadPage();" >Denied</button></td>
+            <td><button type='submit' name='verified' value="<?php echo $row['student_id'] ?>" onclick="refreshPage();" >Verified</button></td>
+            <td><button type='submit' name='denied' value="<?php echo $row['student_id'] ?>" onclick="refreshPage();" >Denied</button></td>
       </tr><?php                
     }
     echo "</table>";

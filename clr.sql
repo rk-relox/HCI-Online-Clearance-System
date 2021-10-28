@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2021 at 05:56 PM
+-- Generation Time: Oct 26, 2021 at 09:14 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -31,11 +31,32 @@ CREATE TABLE `clearance` (
   `clearance_id` int(11) NOT NULL,
   `lesson_plan_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `remarks` enum('Complete','Incomplete') NOT NULL,
+  `remarks` enum('Complete','Incomplete','Pending') NOT NULL,
   `comment` varchar(100) NOT NULL,
   `date_time_created` datetime NOT NULL,
   `date_time_updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `clearance`
+--
+
+INSERT INTO `clearance` (`clearance_id`, `lesson_plan_id`, `student_id`, `remarks`, `comment`, `date_time_created`, `date_time_updated`) VALUES
+(22, 1, 3, 'Pending', '', '2021-10-27 01:15:09', '0000-00-00 00:00:00'),
+(23, 5, 3, 'Pending', '', '2021-10-27 01:15:09', '0000-00-00 00:00:00'),
+(24, 1010, 3, 'Pending', '', '2021-10-27 01:15:09', '0000-00-00 00:00:00'),
+(25, 1015, 3, 'Pending', '', '2021-10-27 01:15:09', '0000-00-00 00:00:00'),
+(26, 1, 2, 'Pending', '', '2021-10-27 01:16:15', '0000-00-00 00:00:00'),
+(27, 5, 2, 'Pending', '', '2021-10-27 01:16:15', '0000-00-00 00:00:00'),
+(28, 1010, 2, 'Pending', '', '2021-10-27 01:16:15', '0000-00-00 00:00:00'),
+(29, 1015, 2, 'Pending', '', '2021-10-27 01:16:15', '0000-00-00 00:00:00'),
+(30, 1016, 2, 'Pending', '', '2021-10-27 01:20:29', '0000-00-00 00:00:00'),
+(31, 1016, 3, 'Pending', '', '2021-10-27 01:20:29', '0000-00-00 00:00:00'),
+(42, 1, 6, 'Pending', '', '2021-10-27 02:26:38', '0000-00-00 00:00:00'),
+(43, 5, 6, 'Pending', '', '2021-10-27 02:26:38', '0000-00-00 00:00:00'),
+(44, 1010, 6, 'Pending', '', '2021-10-27 02:26:38', '0000-00-00 00:00:00'),
+(45, 1015, 6, 'Pending', '', '2021-10-27 02:26:38', '0000-00-00 00:00:00'),
+(46, 1016, 6, 'Pending', '', '2021-10-27 02:26:38', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -56,12 +77,14 @@ CREATE TABLE `lesson_plan` (
 --
 
 INSERT INTO `lesson_plan` (`lesson_plan_id`, `teacher_id`, `subject_id`, `advisory_section_id`, `section_id`) VALUES
-(1, 1, 101, 1, 1),
+(1, 1, 103, 1, 1),
 (2, 2, 102, 2, 2),
 (3, 3, 103, 3, 3),
 (5, 5, 105, NULL, 1),
 (1010, 12, 106, NULL, 1),
-(1012, 14, 104, 4, 4);
+(1012, 14, 104, 4, 4),
+(1015, 18, 101, NULL, 1),
+(1016, 19, 104, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -113,8 +136,10 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`student_id`, `first_name`, `middle_name`, `last_name`, `grade`, `section_id`, `lrn`, `gender`, `contact_number`, `birthday`, `address`, `username`, `password`, `status`) VALUES
 (2, 'Juana', '', 'Maria', 10, 1, 38273832565, 'Female', 98423648, '2000-04-20', 'Mandaluyong', 'Maria', '123', 'Verified'),
-(3, 'Mc', '', 'Kenny', 10, 1, 3434345343, 'Female', 6, '2000-02-22', 'Jaan Lang', 'Mc', '123', 'Pending'),
-(5, '1', '1', '1', 10, 1, 1, 'Male', 1, '2021-10-22', '1', '1', '1', 'Pending');
+(3, 'Mc', '', 'Kenny', 10, 1, 3434345343, 'Female', 6, '2000-02-22', 'Jaan Lang', 'Mc', '123', 'Verified'),
+(5, '1', '1', '1', 10, 1, 1, 'Male', 1, '2021-10-22', '1', '1', '1', 'Pending'),
+(6, 'Prince', 'Dark', 'Past', 10, 1, 5251545615498, 'Male', 45484, '2000-07-18', 'rfgrutqwdwe', 'dark', '123', 'Verified'),
+(15, 'Student1', '', 'Student1', 10, 2, 2, 'Female', 2, '2021-10-27', 'Jaan Lang', 'Student1', '123', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -169,7 +194,9 @@ INSERT INTO `teacher` (`teacher_id`, `first_name`, `middle_name`, `last_name`, `
 (3, 'Terza', 'Tres', 'Elric', 9425728, '1965-10-05', 'Makati City', 'Terza', '123'),
 (5, 'Cinque', 'Lima', 'Rockbell', 944572824, '1965-10-05', 'Mandaluyon City', 'Cinque', '123'),
 (12, 'Marco', '', 'Miranda', 5, '2021-10-21', 'Jaan Lang', 'marco', '123'),
-(14, 'Quatro', '', 'Apat', 2147483647, '1975-03-22', 'Jaan Lang', 'Quatro', '123');
+(14, 'Quatro', '', 'Apat', 2147483647, '1975-03-22', 'Jaan Lang', 'Quatro', '123'),
+(18, 'Tim', '', 'motty', 4, '2002-02-27', 'Jaan Lang', 'Tim', '123'),
+(19, 'Mat', '', 'Sci', 6, '2021-10-01', 'Jaan Lang', 'Mat', '123');
 
 --
 -- Indexes for dumped tables
@@ -231,13 +258,13 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `clearance`
 --
 ALTER TABLE `clearance`
-  MODIFY `clearance_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `clearance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `lesson_plan`
 --
 ALTER TABLE `lesson_plan`
-  MODIFY `lesson_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1013;
+  MODIFY `lesson_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1017;
 
 --
 -- AUTO_INCREMENT for table `section`
@@ -249,7 +276,7 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `subject`
@@ -261,7 +288,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables

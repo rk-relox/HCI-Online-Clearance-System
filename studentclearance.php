@@ -36,7 +36,7 @@ $section_id = $row1['section_id'];
        <center><h1>Clearance Form</h1></center>
         <p><?php
          if($row1['middle_name'] != null){
-            echo $row1['last_name'] . ', ' . $row1['first_name'] . ' ' . $row1['middle_name'][0]?> <span class="text-right"> 10 - <?php echo $row1['section'] ?></span></p>
+            echo $row1['last_name'] . ', ' . $row1['first_name'] . ' ' . $row1['middle_name'][0]?> <span class="text-right"> 10 - <?php echo $row1['section_name'] ?></span></p>
         <?php }
          else{
             echo $row1['last_name'] . ', ' . $row1['first_name']?> <span class="text-right"> 10 - <?php echo $row1['section_name'] ?></span></p>
@@ -44,13 +44,16 @@ $section_id = $row1['section_id'];
          ?>
        
         <?php
-        $sql = "SELECT a.first_name, a.last_name, c.subject_name, d.section_name
+        $sql = "SELECT a.first_name, a.last_name, a.middle_name, 
+        c.subject_name, d.section_name, f.remarks, f.comment, f.date_time_created
         FROM teacher a
         JOIN lesson_plan b ON a.teacher_id = b.teacher_id
         JOIN subject c ON b.subject_id = c.subject_id
         JOIN section d ON b.section_id = d.section_id
         JOIN student e ON d.section_id = e.section_id
+        JOIN clearance f ON b.lesson_plan_id = f.lesson_plan_id
         WHERE d.section_id = $section_id
+        AND f.student_id = $current_id
         GROUP BY a.teacher_id";
         
 
@@ -65,21 +68,19 @@ $section_id = $row1['section_id'];
             <th>Remarks</th>
             <th>Comments</th>
             <th>Date and Time</th>
-            <th>Edit</th>
             </tr>";
             // output data of each row
             while($row = $result->fetch_assoc()) {?>
-                <?php if($row1['middle_name']==null){
+                <?php if($row['middle_name']==null){
                     $middle_name = "";
                 }else{
-                    $middle_name=$row1['middle_name'];
+                    $middle_name=$row['middle_name'];
                 }?>
                 <td><?php echo $row["subject_name"]; ?></td>
                 <td><?php echo $row["last_name"] . ' ' . $row['first_name'] . '  ' . $middle_name; ?></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?php echo $row["remarks"]; ?></td>
+                <td><?php echo $row["comment"]; ?></td>
+                <td><?php echo $row["date_time_created"]; ?></td>
               </tr><?php                
             }
             echo "</table>";
