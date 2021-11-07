@@ -8,7 +8,7 @@
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost/LAYOUT/index.php",
+            "url": "http://localhost/Online_Clearance_System/login.php",
             "webRoot": "${workspaceFolder}"
         }
     ]
