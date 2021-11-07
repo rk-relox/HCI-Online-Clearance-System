@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2021 at 12:57 PM
+-- Generation Time: Nov 02, 2021 at 07:52 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -44,7 +44,7 @@ CREATE TABLE `clearance` (
 INSERT INTO `clearance` (`clearance_id`, `lesson_plan_id`, `student_id`, `remarks`, `comment`, `date_time_created`, `date_time_updated`) VALUES
 (78, 1, 3, 'Incomplete', 'Wala laging assignment', '2021-11-03 01:50:38', '2021-11-03 02:38:40'),
 (79, 5, 3, 'Pending', '', '2021-11-03 01:50:38', '0000-00-00 00:00:00'),
-(80, 1010, 3, 'Complete', 'Matalinong bata', '2021-11-03 01:50:39', '2021-11-03 17:05:11'),
+(80, 1010, 3, 'Complete', 'Matalinong bata', '2021-11-03 01:50:39', '2021-11-03 02:49:56'),
 (81, 1015, 3, 'Pending', '', '2021-11-03 01:50:39', '0000-00-00 00:00:00'),
 (82, 1016, 3, 'Pending', '', '2021-11-03 01:50:39', '0000-00-00 00:00:00'),
 (83, 1019, 3, 'Complete', 'Napakabait na bata neto', '2021-11-03 01:52:03', '2021-11-03 02:32:03'),

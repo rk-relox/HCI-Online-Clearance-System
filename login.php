@@ -34,19 +34,55 @@ ob_start();
             <br> <br>      
             <input type="submit" value="Login" name="login">
             <br><br>
-            <center><a href="">Create Account</a> </center>
+            <!-- Trigger/Open The Modal -->
+            <center><a  id="myBtn">Create Account</a></center>
             <br><br>
             <center><a href="">Forgot Password?</a></center>
         </form>
         </div>
 </div>
           
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <button class="modal-button"><a href="studentcreate.php" class="modal-link">STUDENTS</a></button>
+    <button class="modal-button"><a href="teachercreate.php" class="modal-link">TEACHERS</a></button>
+  </div>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>
 <?php
 $conn = connect();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { // Login process
+  if (isset($_POST['login'])) {
     $Username = $_POST['Username'];
     $Password = $_POST['Password'];
     
@@ -72,6 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // Login process
             header("location:teacherdashboard.php");
         }
     }
+  }
+   
 }
     
 ?>

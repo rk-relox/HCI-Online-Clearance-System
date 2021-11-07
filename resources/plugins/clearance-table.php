@@ -3,13 +3,10 @@
 
 $student = "SELECT a.student_id, a.first_name, a.middle_name, a.last_name, a.lrn, b.remarks, b.comment
 FROM student a 
-JOIN clearance b ON b.student_id = a.student_id
-JOIN lesson_plan c ON b.lesson_plan_id = b.lesson_plan_id
-JOIN teacher d ON d.teacher_id = c.teacher_id
-JOIN section e ON e.section_id = c.section_id
-WHERE d.teacher_id = $current_id
-AND a.section_id = $section_id
-GROUP BY a.student_id";
+JOIN clearance b ON a.student_id = b.student_id
+JOIN lesson_plan c ON b.lesson_plan_id = c.lesson_plan_id
+JOIN teacher d ON c.teacher_id = d.teacher_id
+WHERE d.teacher_id = $current_id";
 
 $result = $conn->query($student);
 
@@ -31,7 +28,7 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["lrn"]?></td>
             <td><?php echo $row["remarks"]?></td>
             <td><?php echo $row["comment"]?></td>
-            <td><button type='submit' name='verified' value="<?php echo $row['student_id'] ?>" >Edit</button></td>
+            <td><a href="clearance-edit.php?student_id=<?php echo $row["student_id"]; ?>">Edit</a></td>
       </tr><?php                
     }
     echo "</table>";

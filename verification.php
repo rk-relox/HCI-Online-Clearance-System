@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // A form is posted
             VALUES ('$lesson_id', '$student_id', 'Pending', NOW())";
             $query1 = mysqli_query($conn, $sql1);
         }
-        
+        header("location:verification.php");
      
       
     }
